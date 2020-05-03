@@ -13,7 +13,7 @@ pipeline {
         REGISTRY_PROTOCOL="https"
         REGISTRY_URL = "hub.xiaomo.cool:6443"
 
-        DockerfileName="Dockerfile"
+        Dockerfile="Dockerfile"
     }
 
     options {
@@ -30,7 +30,7 @@ pipeline {
         stage('build') {
             steps {
                 container('dockerd') {
-                    sh label: 'Docker Image', script: "docker build -t ${env.REGISTRY_URL}/${env.PROJECT_NAME}/${env.APPLICATION_NAME}:${BUILD_ID} -f ${env.DockerfileName} ."
+                    sh label: 'Docker Image', script: "docker build -t ${env.REGISTRY_URL}/${env.PROJECT_NAME}/${env.APPLICATION_NAME}:${BUILD_ID} -f ${env.Dockerfile} ."
                 }
             }
         }
