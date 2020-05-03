@@ -34,7 +34,7 @@ spec:
         - name: regcred
       containers:
         - name: dop
-          image: hub.xiaomo.site/kube/dop:34
+          image: hub.xiaomo.site/kube/dop:IMAGE_TAG
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -52,19 +52,3 @@ spec:
             - name: http
               protocol: TCP
               containerPort: 8080
-#          readinessProbe:
-#            httpGet:
-#              port: 8080
-#              path: /v3/admin/healthz
-#              scheme: HTTP
-#            initialDelaySeconds: 5
-#            periodSeconds: 2
-#            timeoutSeconds: 1
-#          livenessProbe:
-#            httpGet:
-#              port: 8080
-#              path: /v3/admin/healthz
-#              scheme: HTTP
-#            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
