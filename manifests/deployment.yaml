@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dop
+spec:
+  selector:
+    app: dop
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dop
+  labels:
+    app: dop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dop
+  template:
+    metadata:
+      labels:
+        app: dop
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: dop
+          image: hub.xiaomo.site/kube/dop:34
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+          env:
+            - name: sqlconn
+              value: "root:root@tcp(mysql:3306)/dop?charset=utf8"
+            - name: runmode
+              value: "prod"
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8080
+#          readinessProbe:
+#            httpGet:
+#              port: 8080
+#              path: /v3/admin/healthz
+#              scheme: HTTP
+#            initialDelaySeconds: 5
+#            periodSeconds: 2
+#            timeoutSeconds: 1
+#          livenessProbe:
+#            httpGet:
+#              port: 8080
+#              path: /v3/admin/healthz
+#              scheme: HTTP
+#            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5

@@ -1,0 +1,20 @@
+<table id="cluster" lay-filter="test"></table>
+<script src="/static/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#cluster'
+            ,height: 312
+            ,url: '/project' //数据接口
+            ,page: true // 开启分页
+            ,cols: [[
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '项目名', width: 150, sort: true}
+                ,{field: 'owner', title: '管理员', width: 150}
+                ,{field: 'cluster', title: '关联集群', width: 150}
+                ,{field: 'description', title: '描述', width: 150}
+            ]]
+        });
+    });
+</script>

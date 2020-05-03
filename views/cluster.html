@@ -1,0 +1,18 @@
+<table id="cluster" lay-filter="test"></table>
+<script src="/static/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#cluster'
+            ,height: 312
+            ,url: '/cluster' //数据接口
+            ,page: true // 开启分页
+            ,cols: [[
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                ,{field: 'Name', title: '集群名', width: 150, sort: true}
+                ,{field: 'Description', title: '描述', width: 150}
+            ]]
+        });
+    });
+</script>
