@@ -23,7 +23,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git credentialsId: "${env.REPOSITORY_AUTH}", url: "${env.REPOSITORY_URL}"
+                git url: "${env.REPOSITORY_URL}"
             }
         }
 
