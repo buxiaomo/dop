@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dop
+  name: APPLICATION_NAME
 spec:
   selector:
-    app: dop
+    app: APPLICATION_NAME
   type: NodePort
   ports:
     - name: http
@@ -17,24 +17,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dop
+  name: APPLICATION_NAME
   labels:
-    app: dop
+    app: APPLICATION_NAME
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dop
+      app: APPLICATION_NAME
   template:
     metadata:
       labels:
-        app: dop
+        app: APPLICATION_NAME
     spec:
       imagePullSecrets:
         - name: regcred
       containers:
-        - name: dop
-          image: hub.xiaomo.site/kube/dop:IMAGE_TAG
+        - name: APPLICATION_NAME
+          image: REGISTRY_URL/PROJECT_NAME/APPLICATION_NAME:IMAGE_TAG
           imagePullPolicy: IfNotPresent
           resources:
             limits:

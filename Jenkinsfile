@@ -52,6 +52,9 @@ pipeline {
             steps {
                 container('kubectl') {
                     sh label: 'namespace', script: "kubectl get ns ${env.PROJECT_NAME}-dev || kubectl create ns ${env.PROJECT_NAME}-dev"
+                    sh label: 'change tag', script: "sed -i \"s#APPLICATION_NAME#${env.APPLICATION_NAME}#\" ./manifests/deployment.yaml"
+                    sh label: 'change tag', script: "sed -i \"s#PROJECT_NAME#${env.PROJECT_NAME}#\" ./manifests/deployment.yaml"
+                    sh label: 'change tag', script: "sed -i \"s#REGISTRY_URL#${env.REGISTRY_URL}#\" ./manifests/deployment.yaml"
                     sh label: 'change tag', script: "sed -i \"s#IMAGE_TAG#${BUILD_ID}#\" ./manifests/deployment.yaml"
                     sh label: 'deploy', script: "kubectl apply -n ${env.PROJECT_NAME}-dev -f ./manifests/deployment.yaml"
                 }
