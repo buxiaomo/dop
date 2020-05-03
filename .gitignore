@@ -24,5 +24,7 @@
 # vendor/
 
 # 项目文件
+main
 dop
+vendor
 dop.sqlite
