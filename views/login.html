@@ -10,9 +10,6 @@
 <form class="layui-form" action="" method="post">
     <div class="container">
         <button class="close" title="关闭">X</button>
-        <div class="layui-form-mid layui-word-aux">
-            <img id="logoid" src="06.png" height="35">
-        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
@@ -28,8 +25,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">验证码</label>
             <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input verity">
+                <input type="text" name="captcha" id="captcha" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input verity">
             </div>
+            <span>{{ create_captcha }}</span>
         </div>
 
         <div class="layui-form-item">
@@ -66,6 +64,18 @@
            ,"sex": "女"
            ,"desc": "我爱 layui"
          })*/
+    });
+</script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        setTimeout(function () {
+            $('#error_msg').html('');
+        }, 3000)
     });
 </script>
 </body>
