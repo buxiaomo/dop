@@ -48,6 +48,7 @@ func initTable(){
 			Password: "admin",
 			Email: "95112082@qq.com",
 			Lock: false,
+			IsAdmin: true,
 		}
 		o.Insert(&user)
 		o.Commit()

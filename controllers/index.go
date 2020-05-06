@@ -1,15 +1,12 @@
 package controllers
 
-import (
-	"github.com/astaxie/beego"
-)
-
 type IndexController struct {
-	beego.Controller
+	BaseController
 }
 
 func (c *IndexController) Get() {
 	c.Data["Title"] = "首页"
+	c.Data["Username"] = c.GetSession("Username")
 	c.Layout = "layout/layout.html"
 	c.TplName = "index.html"
 }

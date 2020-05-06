@@ -1,13 +1,12 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/buxiaomo/dop/models"
 )
 
 type ClusterController struct {
-	beego.Controller
+	BaseController
 }
 
 func (c *ClusterController) Get() {
