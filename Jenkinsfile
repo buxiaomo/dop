@@ -4,14 +4,14 @@ pipeline {
     }
 
     environment {
-        PROJECT_NAME="kube"
+        PROJECT_NAME="devops"
         APPLICATION_NAME="dop"
 
         REPOSITORY_URL = "https://github.com/buxiaomo/dop.git"
 
         REGISTRY_AUTH = "Registry"
         REGISTRY_PROTOCOL="https"
-        REGISTRY_URL = "hub.xiaomo.cool:6443"
+        REGISTRY_URL = "hub.xiaomo.io:6443"
 
         Dockerfile="Dockerfile"
     }
