@@ -1,14 +1,14 @@
 <span class="layui-breadcrumb">
     <a href="/">首页</a>
-    <a><cite>项目管理</cite></a>
+    <a><cite>应用管理</cite></a>
 </span>
-<table id="project" lay-filter="test"></table>
+<table id="application" lay-filter="test"></table>
 <script src="/static/layui.js"></script>
 <script>
     layui.use('table', function(){
         var table = layui.table;
         table.render({
-            elem: '#project'
+            elem: '#application'
             ,height: 312
             ,url: '/project' //数据接口
             ,page: true // 开启分页

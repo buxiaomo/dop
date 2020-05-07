@@ -7,8 +7,34 @@
             <li class="layui-nav-item"><a href="/project">项目管理</a></li>
             <li class="layui-nav-item"><a href="/application">应用管理</a></li>
             <li class="layui-nav-item"><a href="/cicd">CI/CD</a></li>
-            <li class="layui-nav-item"><a href="/appstore">应用市场</a></li>
-            <li class="layui-nav-item"><a href="/appstore">平台设置</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">应用市场</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/appstore/db">数据库</a></dd>
+                    <dd><a href="/appstore/cache">缓存数据库</a></dd>
+                    <dd><a href="/appstore/cache">反向代理</a></dd>
+                    <dd><a href="/appstore/cache">持续集成</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">平台设置</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/user">用户管理</a></dd>
+                </dl>
+            </li>
         </ul>
     </div>
 </div>
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
