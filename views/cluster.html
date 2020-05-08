@@ -2,21 +2,93 @@
     <a href="/">首页</a>
     <a><cite>集群管理</cite></a>
 </span>
-<table id="cluster" lay-filter="test"></table>
-<script src="/static/layui.js"></script>
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
-        table.render({
-            elem: '#cluster'
-            ,height: 312
-            ,url: '/cluster' //数据接口
-            ,page: true // 开启分页
-            ,cols: [[
-                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-                ,{field: 'Name', title: '集群名', width: 150, sort: true}
-                ,{field: 'Description', title: '描述', width: 150}
-            ]]
+
+<div class="layui-row">
+    <div class="layui-col-lg6">
+        <button id="addcluster" type="button" class="layui-btn layui-btn-sm layui-btn-normal"><i class="layui-icon layui-icon-addition"> </i>添加集群</button>
+    </div>
+    <div class="layui-col-lg6">
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</div>
+
+<div class="layui-row">
+    <table class="layui-table" lay-data="{height: 'full-200', cellMinWidth: 80, url:'/cluster/list', page:true, id:'idTest'}" lay-filter="cluster">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+            <th lay-data="{field:'id', width:100, sort: true, fixed: true}">ID</th>
+            <th lay-data="{field:'name'}">集群名</th>
+            <th lay-data="{field:'provider'}">提供方</th>
+            <th lay-data="{field:'registry'}">镜像仓库</th>
+            <th lay-data="{field:'project'}">项目数量</th>
+            <th lay-data="{field:'description'}">描述</th>
+            <th lay-data="{field:'creattime'}">创建时间</th>
+            <th lay-data="{fixed: 'right', align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+        </thead>
+    </table>
+    <script type="text/javascript" src="/static/layui.js"></script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        layui.use('table', function(){
+            var table = layui.table;
+            //监听工具条
+            table.on('tool(cluster)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        $.ajax({
+                            url: "/cluster/delete/" + data.id,
+                            type:'GET',
+                            dataType:'json',
+                            success:function(result, textStatus, xhr){
+                                console.log(result);
+                                console.log(xhr);
+                                if (xhr.status === 204){
+                                    obj.del();
+                                    layer.close(index);
+                                    layer.open({
+                                        type: 0,
+                                        shadeClose: true,
+                                        content: '删除成功!'
+                                    });
+                                } else {
+                                    layer.open({
+                                        type: 0,
+                                        shadeClose: true,
+                                        content: '删除失败, ' + result.msg
+                                    });
+                                }
+                            }
+                        });
+                    });
+                } else if(obj.event === 'edit'){
+                    layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                }
+            });
         });
-    });
-</script>
+        layui.use('layer', function(){
+            var $ = layui.jquery, layer = layui.layer;
+            $(document).on('click','#addcluster',function(){
+                layer.prompt({
+                    formType: 2,
+                    value: '初始值',
+                    title: '请输入值',
+                    area: ['800px', '350px'] //自定义文本域宽高
+                }, function(value, index, elem){
+                    alert(value); //得到value
+                    layer.close(index);
+                });
+            });
+        });
+    </script>
+</div>

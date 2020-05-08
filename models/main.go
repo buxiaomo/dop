@@ -66,7 +66,7 @@ func initTable(){
 
 func init() {
 	DBInitNew().InitDatabase()
-	orm.RegisterModel(new(User), new(Role), new(Project), new(Cluster))
+	orm.RegisterModel(new(User), new(Role), new(Project), new(Cluster), new(Registry))
 	err := orm.RunSyncdb("default", false, true)
 	if err != nil {
 		logs.Error(err.Error())
