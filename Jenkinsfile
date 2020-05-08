@@ -11,7 +11,7 @@ pipeline {
 
         REGISTRY_AUTH = "Registry"
         REGISTRY_PROTOCOL="https"
-        REGISTRY_URL = "hub.xiaomo.io:6443"
+        REGISTRY_URL = "hub.xiaomo.io"
 
         Dockerfile="Dockerfile"
     }
