@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - devops-platform.xiaomo.io
+        - dop.xiaomo.io
       secretName: xiaomo-io-tls
   rules:
-    - host: devops-platform.xiaomo.io
+    - host: dop.xiaomo.io
       http:
         paths:
           - path: /
