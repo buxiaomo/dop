@@ -38,9 +38,7 @@ pipeline {
         stage('push') {
             steps {
                 container('dockerd') {
-                    withDockerRegistry(credentialsId: "${env.REGISTRY_AUTH}", url: "${env.REGISTRY_PROTOCOL}://${env.REGISTRY_URL}") {
-                        sh label: 'Docker', script: "docker push ${env.REGISTRY_URL}/${env.PROJECT_NAME}/${env.APPLICATION_NAME}:${BUILD_ID}"
-                    }
+                    sh label: 'Docker', script: "docker push ${env.REGISTRY_URL}/${env.PROJECT_NAME}/${env.APPLICATION_NAME}:${BUILD_ID}"
                 }
             }
         }
